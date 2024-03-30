@@ -2,6 +2,7 @@ package com.kucoin.sdk;
 
 import com.kucoin.sdk.rest.request.OrderCreateApiRequest;
 import com.kucoin.sdk.rest.response.*;
+import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -15,6 +16,9 @@ public class KucoinRestWrapper {
     public KucoinRestWrapper(String key, String secret, String phrase, Boolean isLogin) {
         KucoinClientBuilder builder = new KucoinClientBuilder().withBaseUrl(URL);
         if (isLogin) {
+            Validate.notNull(key, "apiKey is null");
+            Validate.notNull(secret, "secretKey is null");
+            Validate.notNull(phrase, "passphrase is null");
             builder = builder.withApiKey(key, secret, phrase);
         }
         restClient = builder.buildRestClient();
@@ -23,6 +27,7 @@ public class KucoinRestWrapper {
     // obtain account summary information.
     // https://www.kucoin.com/docs/rest/account/basic-info/get-account-summary-info
     public UserSummaryInfoResponse getUserInfo() {
+
         try {
             return restClient.accountAPI().getUserSummaryInfo();
         } catch (IOException e) {
