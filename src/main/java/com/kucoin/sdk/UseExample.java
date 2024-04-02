@@ -28,8 +28,7 @@ public class UseExample {
         Double price = 70000.01;
 
         OrderCreateResponse response1 = kucoinRestWrapper.createLimitOrder(symbol, side, size, price);
-        System.out.println(response);
-
+        System.out.println(response1);
     }
 
     public static void testWss(String key, String secret, String phrase) {
@@ -37,6 +36,5 @@ public class UseExample {
         kucoinPublicWSClient.subTicker("ETH-BTC", "KCS-BTC");
         KucoinWssWrapper kucoinPrivateWSClient = new KucoinWssWrapper(key, secret, phrase, true);
         kucoinPrivateWSClient.subAccountBalance();
-
     }
 }
